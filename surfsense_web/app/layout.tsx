@@ -92,7 +92,6 @@ export default function RootLayout({
 	// Locale state is managed by LocaleContext and persisted in localStorage
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<GoogleAnalytics gaId="G-T4CHE7W3TE" />
 			<body className={cn(roboto.className, "bg-white dark:bg-black antialiased h-full w-full ")}>
 				<PostHogProvider>
 					<LocaleProvider>
