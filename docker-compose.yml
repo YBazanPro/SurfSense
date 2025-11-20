@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   db:
     image: ankane/pgvector:latest
@@ -35,13 +33,11 @@ services:
   backend:
     build: ./surfsense_backend
     # image: ghcr.io/modsetter/surfsense_backend:latest
-    ports:
-      - "${BACKEND_PORT:-8000}:8000"
+    # ports:
+    #  - "${BACKEND_PORT:-8000}:8000"
     volumes:
       - ./surfsense_backend/app:/app/app
       - shared_temp:/tmp
-    env_file:
-      - ./surfsense_backend/.env
     environment:
       - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-surfsense}
       - CELERY_BROKER_URL=redis://redis:${REDIS_PORT:-6379}/0
@@ -118,10 +114,8 @@ services:
         NEXT_PUBLIC_FASTAPI_BACKEND_URL: ${NEXT_PUBLIC_FASTAPI_BACKEND_URL:-http://localhost:8000}
         NEXT_PUBLIC_FASTAPI_BACKEND_AUTH_TYPE: ${NEXT_PUBLIC_FASTAPI_BACKEND_AUTH_TYPE:-LOCAL}
         NEXT_PUBLIC_ETL_SERVICE: ${NEXT_PUBLIC_ETL_SERVICE:-DOCLING}
-    ports:
-      - "${FRONTEND_PORT:-3000}:3000"
-    env_file:
-      - ./surfsense_web/.env
+    # ports:
+    #   - "${FRONTEND_PORT:-3000}:3000"
     depends_on:
       - backend
 

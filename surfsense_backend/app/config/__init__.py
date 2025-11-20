@@ -7,7 +7,7 @@ import yaml
 from chonkie import AutoEmbeddings, CodeChunker, RecursiveChunker
 from chonkie.embeddings.azure_openai import AzureOpenAIEmbeddings
 from chonkie.embeddings.registry import EmbeddingsRegistry
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from rerankers import Reranker
 
 
@@ -67,8 +67,14 @@ EmbeddingsRegistry.register_model("text-embedding-3-large", FixedAzureOpenAIEmbe
 # Get the base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-env_file = BASE_DIR / ".env"
-load_dotenv(env_file)
+import os
+print("=== ENVIRONMENT VARIABLES ===")
+for k, v in os.environ.items():
+    print(f"{k}={v}")
+print("=============================")
+
+# env_file = BASE_DIR / ".env"
+# load_dotenv(env_file)
 
 
 def is_ffmpeg_installed():
@@ -99,6 +105,7 @@ def load_global_llm_configs():
     #         print("Info: Using global_llm_config.example.yaml (copy to global_llm_config.yaml for production)")
 
     if not global_config_file.exists():
+        print("Warning: No global_llm_config.yaml file found")
         # No global configs available
         return []
 
@@ -128,12 +135,17 @@ class Config:
     DATABASE_URL = os.getenv("DATABASE_URL")
 
     NEXT_FRONTEND_URL = os.getenv("NEXT_FRONTEND_URL")
+    print(f"NEXT_FRONTEND_URL={NEXT_FRONTEND_URL}")
+
     # Backend URL to override the http to https in the OAuth redirect URI
     BACKEND_URL = os.getenv("BACKEND_URL")
+    print(f"BACKEND_URL={BACKEND_URL}")
 
     # Auth
     AUTH_TYPE = os.getenv("AUTH_TYPE")
     REGISTRATION_ENABLED = os.getenv("REGISTRATION_ENABLED", "TRUE").upper() == "TRUE"
+    ALLOWED_ORIGIN = os.getenv("ALLOWED_ORIGIN", "*")
+    print(f"ALLOWED_ORIGIN={ALLOWED_ORIGIN}")
 
     # Google OAuth
     GOOGLE_OAUTH_CLIENT_ID = os.getenv("GOOGLE_OAUTH_CLIENT_ID")
