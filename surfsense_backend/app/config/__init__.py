@@ -67,9 +67,15 @@ EmbeddingsRegistry.register_model("text-embedding-3-large", FixedAzureOpenAIEmbe
 # Get the base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+
 env_file = BASE_DIR / ".env"
 load_dotenv(env_file)
 
+import os
+print("=== ENVIRONMENT VARIABLES ===")
+for k, v in os.environ.items():
+    print(f"{k}={v}")
+print("=============================")
 
 def is_ffmpeg_installed():
     """
