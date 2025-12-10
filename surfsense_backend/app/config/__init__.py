@@ -160,6 +160,8 @@ class Config:
 
     # Chonkie Configuration | Edit this to your needs
     EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL")
+    EMBEDDING_MODEL_PROVIDER = os.getenv("EMBEDDING_MODEL_PROVIDER")
+    EMBEDDING_MODEL_PROVIDER_API_KEY = os.getenv("EMBEDDING_MODEL_PROVIDER_API_KEY")
     # Azure OpenAI credentials from environment variables
     AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
     AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
@@ -170,6 +172,10 @@ class Config:
         embedding_kwargs["azure_endpoint"] = AZURE_OPENAI_ENDPOINT
     if AZURE_OPENAI_API_KEY:
         embedding_kwargs["azure_api_key"] = AZURE_OPENAI_API_KEY
+    if EMBEDDING_MODEL_PROVIDER:
+        embedding_kwargs["base_url"] = EMBEDDING_MODEL_PROVIDER
+    if EMBEDDING_MODEL_PROVIDER_API_KEY:
+        embedding_kwargs["api_key"] = EMBEDDING_MODEL_PROVIDER_API_KEY
 
     embedding_model_instance = AutoEmbeddings.get_embeddings(
         EMBEDDING_MODEL,
