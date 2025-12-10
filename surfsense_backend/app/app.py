@@ -26,10 +26,6 @@ def registration_allowed():
         )
     return True
 
-def allowed_origin():
-    if config.ALLOWED_ORIGIN:
-        return config.ALLOWED_ORIGIN
-    return "*"
 
 app = FastAPI(lifespan=lifespan)
 
@@ -40,7 +36,7 @@ app.add_middleware(ProxyHeadersMiddleware, trusted_hosts="*")
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[allowed_origin],  # Allows all origins
+    allow_origins=["*"],  # Allows all origins
     allow_credentials=True,
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
