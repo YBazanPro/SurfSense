@@ -7,7 +7,6 @@ import yaml
 from chonkie import AutoEmbeddings, CodeChunker, RecursiveChunker
 from chonkie.embeddings.azure_openai import AzureOpenAIEmbeddings
 from chonkie.embeddings.registry import EmbeddingsRegistry
-from dotenv import load_dotenv
 from rerankers import Reranker
 
 
@@ -65,11 +64,7 @@ EmbeddingsRegistry.register_model("text-embedding-3-large", FixedAzureOpenAIEmbe
 
 
 # Get the base directory of the project
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
-
-env_file = BASE_DIR / ".env"
-load_dotenv(env_file)
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 import os
 print("=== ENVIRONMENT VARIABLES ===")
