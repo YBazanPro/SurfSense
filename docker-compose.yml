@@ -45,6 +45,10 @@ services:
       - UNSTRUCTURED_HAS_PATCHED_LOOP=1
       - LANGCHAIN_TRACING_V2=false
       - LANGSMITH_TRACING=false
+      - ALLOWED_ORIGIN=${FRONTEND_URL}
+      - NEXT_FRONTEND_URL=${FRONTEND_URL}
+      - AUTH_TYPE=${AUTH_TYPE:-LOCAL}
+      - ETL_SERVICE=${ETL_SERVICE:-DOCLING}
     depends_on:
       - db
       - redis
@@ -103,9 +107,9 @@ services:
       context: ./surfsense_web
       # image: ghcr.io/modsetter/surfsense_ui:latest
       args:
-        NEXT_PUBLIC_FASTAPI_BACKEND_URL: ${NEXT_PUBLIC_FASTAPI_BACKEND_URL:-http://localhost:8000}
-        NEXT_PUBLIC_FASTAPI_BACKEND_AUTH_TYPE: ${NEXT_PUBLIC_FASTAPI_BACKEND_AUTH_TYPE:-LOCAL}
-        NEXT_PUBLIC_ETL_SERVICE: ${NEXT_PUBLIC_ETL_SERVICE:-DOCLING}
+        NEXT_PUBLIC_FASTAPI_BACKEND_URL: ${BACKEND_URL:-http://localhost:8000}
+        NEXT_PUBLIC_FASTAPI_BACKEND_AUTH_TYPE: ${AUTH_TYPE:-LOCAL}
+        NEXT_PUBLIC_ETL_SERVICE: ${ETL_SERVICE:-DOCLING}
     depends_on:
       - backend
 
