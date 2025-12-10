@@ -49,6 +49,8 @@ services:
       - NEXT_FRONTEND_URL=${FRONTEND_URL}
       - AUTH_TYPE=${AUTH_TYPE:-LOCAL}
       - ETL_SERVICE=${ETL_SERVICE:-DOCLING}
+      - EMBEDDING_MODEL_PROVIDER=${EMBEDDING_MODEL_PROVIDER}
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL}
     depends_on:
       - db
       - redis
