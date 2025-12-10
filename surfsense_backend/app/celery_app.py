@@ -4,10 +4,6 @@ import os
 
 from celery import Celery
 from celery.schedules import crontab
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
 
 # Get Celery configuration from environment
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", "redis://localhost:6379/0")

@@ -7,7 +7,6 @@ import yaml
 from chonkie import AutoEmbeddings, CodeChunker, RecursiveChunker
 from chonkie.embeddings.azure_openai import AzureOpenAIEmbeddings
 from chonkie.embeddings.registry import EmbeddingsRegistry
-from dotenv import load_dotenv
 from rerankers import Reranker
 
 
@@ -68,7 +67,6 @@ EmbeddingsRegistry.register_model("text-embedding-3-large", FixedAzureOpenAIEmbe
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 env_file = BASE_DIR / ".env"
-load_dotenv(env_file)
 
 
 def is_ffmpeg_installed():

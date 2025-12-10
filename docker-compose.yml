@@ -40,8 +40,6 @@ services:
     volumes:
       - ./surfsense_backend/app:/app/app
       - shared_temp:/tmp
-    env_file:
-      - ./surfsense_backend/.env
     environment:
       - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-surfsense}
       - CELERY_BROKER_URL=redis://redis:${REDIS_PORT:-6379}/0
@@ -120,8 +118,6 @@ services:
         NEXT_PUBLIC_ETL_SERVICE: ${NEXT_PUBLIC_ETL_SERVICE:-DOCLING}
     ports:
       - "${FRONTEND_PORT:-3000}:3000"
-    env_file:
-      - ./surfsense_web/.env
     depends_on:
       - backend
 

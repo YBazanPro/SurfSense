@@ -2,7 +2,6 @@ import argparse
 import logging
 
 import uvicorn
-from dotenv import load_dotenv
 
 from app.config.uvicorn import load_uvicorn_config
 
@@ -11,8 +10,6 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
 )
-
-load_dotenv()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run the SurfSense application")
