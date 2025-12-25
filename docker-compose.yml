@@ -65,8 +65,6 @@ services:
   flower:
     build: ./surfsense_backend
     command: celery -A app.celery_app flower --port=5555
-    expose:
-      - "${FLOWER_PORT:-5555}:5555"
     env_file: [.env]
     environment:
       - PYTHONPATH=/app
