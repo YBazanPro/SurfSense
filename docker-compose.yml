@@ -15,10 +15,7 @@ services:
     command: redis-server --appendonly yes
 
   backend:
-    build: 
-      context: ./surfsense_backend
-      args:
-        NEXT_FRONTEND_URL: ${NEXT_FRONTEND_URL}
+    build: ./surfsense_backend
     volumes:
       - ./surfsense_backend/app:/app/app
       - shared_temp:/tmp
@@ -30,6 +27,7 @@ services:
       - UNSTRUCTURED_HAS_PATCHED_LOOP=1
       - LANGCHAIN_TRACING_V2=false
       - LANGSMITH_TRACING=false
+      - NEXT_FRONTEND_URL=${NEXT_FRONTEND_URL}
     depends_on:
       - db
       - redis
