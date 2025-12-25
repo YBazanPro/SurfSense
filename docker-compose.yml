@@ -16,6 +16,8 @@ services:
 
   backend:
     build: ./surfsense_backend
+    expose:
+      - 8000
     volumes:
       - ./surfsense_backend/app:/app/app
       - shared_temp:/tmp
@@ -80,6 +82,8 @@ services:
         NEXT_PUBLIC_FASTAPI_BACKEND_URL: ${NEXT_PUBLIC_FASTAPI_BACKEND_URL:-http://localhost:8000}
         NEXT_PUBLIC_FASTAPI_BACKEND_AUTH_TYPE: ${NEXT_PUBLIC_FASTAPI_BACKEND_AUTH_TYPE:-LOCAL}
         NEXT_PUBLIC_ETL_SERVICE: ${NEXT_PUBLIC_ETL_SERVICE:-DOCLING}
+    expose:
+      - 3000
     env_file: [.env]
     depends_on:
       - backend
