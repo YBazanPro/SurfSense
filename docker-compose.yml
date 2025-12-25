@@ -15,7 +15,10 @@ services:
     command: redis-server --appendonly yes
 
   backend:
-    build: ./surfsense_backend
+    build: 
+      context: ./surfsense_backend
+      args:
+        NEXT_FRONTEND_URL: ${NEXT_FRONTEND_URL}
     volumes:
       - ./surfsense_backend/app:/app/app
       - shared_temp:/tmp
